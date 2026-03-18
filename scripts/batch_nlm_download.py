@@ -11,6 +11,7 @@ USO:
   python3 scripts/batch_nlm_download.py --merge    # gera 1 .apkg com tudo
 """
 import json
+import hashlib
 import os
 import re
 import subprocess
@@ -21,7 +22,7 @@ from pathlib import Path
 import genanki
 import random
 
-random.seed(77)
+random.seed(78)
 
 # Reutilizar CSS e Model do notebooklm_to_anki.py
 CARD_CSS = '''
@@ -90,7 +91,8 @@ def converter_json(json_path, deck_name):
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-    except:
+    except (json.JSONDecodeError, KeyError, OSError) as e:
+        print(f"⚠️  Erro ao ler {json_path}: {e}")
         return []
 
     notas = []
@@ -149,7 +151,7 @@ def main():
             print("⚠️  0 cards")
             continue
 
-        deck_id = abs(hash(deck_name)) % (10**9) + 3000000000
+        deck_id = int(hashlib.md5(deck_name.encode()).hexdigest()[:8], 16) % (10**9) + 3000000000
         deck = genanki.Deck(deck_id, deck_name)
         for n in notas:
             deck.add_note(n)

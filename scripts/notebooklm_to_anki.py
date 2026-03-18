@@ -35,6 +35,7 @@ DEPENDÊNCIAS:
   pip install notebooklm-py  # para --download
 """
 import json
+import hashlib
 import os
 import re
 import subprocess
@@ -144,7 +145,7 @@ def converter_json_para_apkg(
         deck_name = f"NLM::{clean_title}"
 
     # Criar deck com ID baseado no nome (determinístico)
-    deck_id = abs(hash(deck_name)) % (10**9) + 3000000000
+    deck_id = int(hashlib.md5(deck_name.encode()).hexdigest()[:8], 16) % (10**9) + 3000000000
     deck = genanki.Deck(deck_id, deck_name)
 
     for card in cards:

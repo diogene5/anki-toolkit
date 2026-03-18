@@ -35,6 +35,7 @@ USO:
 DEPENDÊNCIAS:
   pip install genanki
 """
+from pathlib import Path
 import genanki
 import random
 
@@ -75,7 +76,7 @@ BASIC_MODEL = genanki.Model(
     # - Divider com gradiente (landmark visual Q→A)
     # - Callouts semi-transparentes (integrados, não bolted-on)
     css='''
-    .card { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.55; text-align: left; color: #bac2de; background-color: #181825; padding: 28px 24px; }
+    .card { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.55; text-align: left; color: #bac2de; background-color: #181825; padding: 28px 24px; max-width: 65ch; margin: 0 auto; }
     .front { font-size: 17px; font-weight: 600; line-height: 1.45; color: #cdd6f4; letter-spacing: -0.15px; }
     .back { font-size: 15px; line-height: 1.65; color: #a6adc8; }
     .back b, .back strong { color: #cdd6f4; font-weight: 600; }
@@ -114,7 +115,7 @@ TRIADE_MODEL = genanki.Model(
         },
     ],
     css='''
-    .card { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.55; text-align: left; color: #bac2de; background-color: #181825; padding: 28px 24px; }
+    .card { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.55; text-align: left; color: #bac2de; background-color: #181825; padding: 28px 24px; max-width: 65ch; margin: 0 auto; }
     .front { font-size: 17px; font-weight: 600; line-height: 1.45; color: #cdd6f4; letter-spacing: -0.15px; }
     .back { font-size: 15px; line-height: 1.65; color: #a6adc8; }
     .back b, .back strong { color: #cdd6f4; font-weight: 600; }
@@ -467,7 +468,7 @@ for c in vscode_cards:
 
 # ─── Exportar ──────────────────────────────────────────────────
 
-output_path = '/Users/diogenes/projetos/anki/Dev_Programacao.apkg'
+output_path = Path(__file__).parent / 'Dev_Programacao.apkg'
 
 package = genanki.Package([d for d in decks.values()])
 package.write_to_file(output_path)

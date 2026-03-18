@@ -151,6 +151,14 @@ def limpar(perfil: str = "Data", auto: bool = False, dry_run: bool = False) -> N
     print(f"\n🧹 Limpeza — Perfil: {perfil}")
     print(f"{'─' * 50}")
 
+    import subprocess
+    result = subprocess.run(["pgrep", "-x", "Anki"], capture_output=True)
+    if result.returncode == 0:
+        print("⚠️  O Anki está aberto! Feche-o antes de modificar o banco.")
+        if not auto:
+            return
+        print("  --auto forçando continuação...")
+
     if not dry_run:
         fazer_backup(perfil)
 

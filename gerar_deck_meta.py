@@ -13,6 +13,7 @@ Cards sobre o que aprendemos hoje:
 
 É um "meta-deck" — flashcards sobre como fazer flashcards melhores.
 """
+from pathlib import Path
 import genanki
 import random
 
@@ -423,7 +424,7 @@ for c in workflow_cards:
 
 
 # ─── Exportar ──────────────────────────────────────────────────
-output = '/Users/diogenes/projetos/anki/Meta_Anki_Flashcards.apkg'
+output = Path(__file__).parent / 'Meta_Anki_Flashcards.apkg'
 package = genanki.Package([d for d in decks.values()])
 package.write_to_file(output)
 

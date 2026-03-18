@@ -19,6 +19,7 @@ USO:
   python3 scripts/batch_por_categoria.py --categoria Programação  # só 1
 """
 import json
+import hashlib
 import os
 import re
 import argparse
@@ -28,7 +29,7 @@ from collections import defaultdict
 import genanki
 import random
 
-random.seed(77)
+random.seed(79)
 
 # ─── CSS ──────────────────────────────────────────────────────
 CARD_CSS = '''
@@ -185,7 +186,8 @@ def main():
         try:
             with open(json_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-        except:
+        except (json.JSONDecodeError, KeyError, OSError) as e:
+            print(f"⚠️  Erro ao ler {json_path}: {e}")
             continue
 
         title = data.get('title', json_path.stem)
@@ -225,7 +227,7 @@ def main():
         for title, cards in items:
             clean = limpar_titulo(title)
             deck_name = f"NLM::{cat}::{clean}"
-            deck_id = abs(hash(deck_name)) % (10**9) + 3000000000
+            deck_id = int(hashlib.md5(deck_name.encode()).hexdigest()[:8], 16) % (10**9) + 3000000000
             deck = genanki.Deck(deck_id, deck_name)
 
             for card in cards:

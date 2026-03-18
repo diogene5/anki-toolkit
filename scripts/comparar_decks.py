@@ -194,7 +194,7 @@ def comparar(deck_filter: str = None) -> None:
     print(f"{'=' * 70}")
     print(f"  Cards analisados: {total_cards}")
     print(f"  Problemas totais: {total_problems}")
-    print(f"  Taxa de qualidade: {(total_cards - total_problems) / total_cards * 100:.0f}%")
+    print(f"  Taxa de qualidade: {((total_cards - total_problems) / total_cards * 100) if total_cards > 0 else 0:.0f}%")
 
     # Sobreposições entre decks
     print(f"\n{'─' * 70}")
