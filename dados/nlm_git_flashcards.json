@@ -1,0 +1,217 @@
+{
+  "title": "Git Flashcards",
+  "cards": [
+    {
+      "front": "Qual problema principal o controle de vers\u00e3o, como o Git, resolve para desenvolvedores?",
+      "back": "Ele gerencia o hist\u00f3rico de altera\u00e7\u00f5es em arquivos, permitindo reverter para vers\u00f5es anteriores, acompanhar mudan\u00e7as e evitar a perda de trabalho."
+    },
+    {
+      "front": "O que \u00e9 Git?",
+      "back": "\u00c9 um software de sistema de controle de vers\u00e3o que monitora e gerencia altera\u00e7\u00f5es em c\u00f3digos e projetos, funcionando como uma linha do tempo."
+    },
+    {
+      "front": "No Git, o que \u00e9 um 'commit'?",
+      "back": "\u00c9 um ponto de salvamento no hist\u00f3rico do projeto, registrando o estado exato dos arquivos em um momento espec\u00edfico."
+    },
+    {
+      "front": "Como o Git armazena diferentes vers\u00f5es de um projeto para economizar espa\u00e7o?",
+      "back": "Ele mant\u00e9m as vers\u00f5es salvas dentro do mesmo arquivo, registrando apenas as altera\u00e7\u00f5es, em vez de duplicar todos os arquivos para cada vers\u00e3o."
+    },
+    {
+      "front": "Al\u00e9m das vers\u00f5es do c\u00f3digo, que outras informa\u00e7\u00f5es um commit no Git armazena?",
+      "back": "Armazena o autor da altera\u00e7\u00e3o, a data, a hora e uma mensagem descritiva do que foi alterado."
+    },
+    {
+      "front": "O Git precisa de uma conex\u00e3o com a internet para funcionar?",
+      "back": "N\u00e3o, o Git funciona de forma local no computador, permitindo versionar o c\u00f3digo offline."
+    },
+    {
+      "front": "Qual \u00e9 a principal fun\u00e7\u00e3o do GitHub em rela\u00e7\u00e3o ao Git?",
+      "back": "O GitHub \u00e9 uma plataforma online (nuvem) para hospedar reposit\u00f3rios Git, facilitando o compartilhamento, a colabora\u00e7\u00e3o e o trabalho em equipe."
+    },
+    {
+      "front": "Qual comando \u00e9 usado no terminal para verificar se o Git est\u00e1 instalado e qual a sua vers\u00e3o?",
+      "back": "git --version"
+    },
+    {
+      "front": "Por que \u00e9 importante configurar o nome e o e-mail no Git antes de come\u00e7ar a us\u00e1-lo?",
+      "back": "Porque cada commit precisa ser associado a um autor, registrando quem fez a altera\u00e7\u00e3o no c\u00f3digo."
+    },
+    {
+      "front": "Para configurar seu nome de usu\u00e1rio globalmente no Git, voc\u00ea usaria o comando `git config --global _____ \"Seu Nome\"`.",
+      "back": "user.name"
+    },
+    {
+      "front": "Qual comando \u00e9 utilizado para listar todas as configura\u00e7\u00f5es globais do Git no terminal?",
+      "back": "git config --global --list"
+    },
+    {
+      "front": "O que \u00e9 o Git Bash?",
+      "back": "\u00c9 um terminal espec\u00edfico para o ambiente Windows que permite executar comandos Git e outros comandos de linha de comando do Linux."
+    },
+    {
+      "front": "No contexto do Git, o que \u00e9 um reposit\u00f3rio?",
+      "back": "\u00c9 uma pasta no computador onde o Git foi inicializado para rastrear e monitorar todas as modifica\u00e7\u00f5es nos arquivos do projeto."
+    },
+    {
+      "front": "Qual comando inicializa um reposit\u00f3rio Git em uma pasta?",
+      "back": "git init"
+    },
+    {
+      "front": "Ap\u00f3s o `git init`, qual pasta oculta \u00e9 criada para que o Git possa gerenciar o versionamento?",
+      "back": "A pasta `.git`."
+    },
+    {
+      "front": "O comando `_____` \u00e9 usado para verificar o estado atual dos arquivos no reposit\u00f3rio, mostrando quais foram modificados, adicionados ou n\u00e3o rastreados.",
+      "back": "git status"
+    },
+    {
+      "front": "O que significa o status 'untracked file' (arquivo n\u00e3o rastreado) no Git?",
+      "back": "Significa que o arquivo \u00e9 novo no diret\u00f3rio e o Git ainda n\u00e3o foi instru\u00eddo a monitorar suas altera\u00e7\u00f5es."
+    },
+    {
+      "front": "Qual \u00e9 a fun\u00e7\u00e3o do comando `git add`?",
+      "back": "Ele adiciona as altera\u00e7\u00f5es dos arquivos \u00e0 'staging area' (\u00e1rea de prepara\u00e7\u00e3o), preparando-os para serem inclu\u00eddos no pr\u00f3ximo commit."
+    },
+    {
+      "front": "Qual a diferen\u00e7a entre os comandos `git add nome_do_arquivo.py` e `git add .`?",
+      "back": "O primeiro adiciona apenas o arquivo especificado, enquanto o segundo adiciona todos os arquivos novos ou modificados no diret\u00f3rio atual e subdiret\u00f3rios."
+    },
+    {
+      "front": "Qual \u00e9 a sintaxe do comando para criar um commit com uma mensagem descritiva?",
+      "back": "git commit -m \"Sua mensagem descritiva\""
+    },
+    {
+      "front": "Para visualizar o hist\u00f3rico completo de commits de um reposit\u00f3rio, qual comando deve ser utilizado?",
+      "back": "git log"
+    },
+    {
+      "front": "O que \u00e9 a 'hash' de um commit no Git?",
+      "back": "\u00c9 um c\u00f3digo identificador \u00fanico de 40 caracteres hexadecimais que garante a integridade e a identidade de cada commit."
+    },
+    {
+      "front": "No VS Code, qual o significado da letra 'M' ao lado de um nome de arquivo na \u00e1rvore de arquivos?",
+      "back": "Significa que o arquivo foi 'Modificado' (Modified) desde o \u00faltimo commit."
+    },
+    {
+      "front": "Na interface do VS Code, o \u00edcone de '+' na aba de Controle de C\u00f3digo-Fonte corresponde a qual comando Git?",
+      "back": "Corresponde ao comando `git add`."
+    },
+    {
+      "front": "Qual \u00e9 a principal diferen\u00e7a entre Git e GitHub?",
+      "back": "Git \u00e9 o software de controle de vers\u00e3o que roda localmente, enquanto o GitHub \u00e9 uma plataforma web para hospedar reposit\u00f3rios Git na nuvem."
+    },
+    {
+      "front": "O que \u00e9 uma 'organiza\u00e7\u00e3o' no GitHub?",
+      "back": "\u00c9 um espa\u00e7o compartilhado onde equipes ou empresas podem gerenciar m\u00faltiplos reposit\u00f3rios e o acesso de colaboradores de forma centralizada."
+    },
+    {
+      "front": "Qual \u00e9 a finalidade do arquivo `.gitignore` em um projeto Git?",
+      "back": "Ele especifica arquivos e pastas que o Git deve ignorar e n\u00e3o incluir no versionamento, como chaves de API, senhas ou arquivos de depend\u00eancia."
+    },
+    {
+      "front": "Qual \u00e9 o nome padr\u00e3o (por conven\u00e7\u00e3o) dado \u00e0 URL do reposit\u00f3rio remoto principal?",
+      "back": "origin"
+    },
+    {
+      "front": "O comando `git _____` \u00e9 usado para enviar os commits do seu reposit\u00f3rio local para o reposit\u00f3rio remoto no GitHub.",
+      "back": "push"
+    },
+    {
+      "front": "O que o comando `git clone` faz?",
+      "back": "Ele cria uma c\u00f3pia local exata de um reposit\u00f3rio existente no GitHub, incluindo todo o c\u00f3digo e o hist\u00f3rico de vers\u00f5es."
+    },
+    {
+      "front": "Qual \u00e9 a diferen\u00e7a fundamental entre 'clonar' (clone) e 'bifurcar' (fork) um reposit\u00f3rio?",
+      "back": "'Clonar' cria uma c\u00f3pia local no seu computador, enquanto 'bifurcar' cria uma c\u00f3pia do reposit\u00f3rio na sua pr\u00f3pria conta do GitHub."
+    },
+    {
+      "front": "Quando \u00e9 mais apropriado usar 'fork' em vez de 'clone'?",
+      "back": "Usa-se 'fork' quando se deseja contribuir para um projeto no qual voc\u00ea n\u00e3o tem permiss\u00e3o de escrita direta, permitindo propor altera\u00e7\u00f5es via Pull Request."
+    },
+    {
+      "front": "O que \u00e9 uma 'branch' no Git?",
+      "back": "\u00c9 uma ramifica\u00e7\u00e3o independente da linha do tempo principal do projeto, permitindo o desenvolvimento de novas funcionalidades ou corre\u00e7\u00f5es sem afetar o c\u00f3digo principal."
+    },
+    {
+      "front": "Qual \u00e9 o nome padr\u00e3o da branch principal em um reposit\u00f3rio Git moderno?",
+      "back": "main"
+    },
+    {
+      "front": "No terminal, qual comando lista todas as branches do reposit\u00f3rio e destaca a branch atual?",
+      "back": "git branch"
+    },
+    {
+      "front": "O que \u00e9 o processo de 'merge' no Git?",
+      "back": "\u00c9 o ato de juntar o hist\u00f3rico de duas branches diferentes, incorporando as altera\u00e7\u00f5es de uma branch em outra."
+    },
+    {
+      "front": "Quando ocorre um 'conflito de merge'?",
+      "back": "Ocorre quando duas branches alteram a mesma linha de c\u00f3digo de maneiras diferentes, e o Git n\u00e3o consegue decidir qual altera\u00e7\u00e3o manter."
+    },
+    {
+      "front": "Qual comando do terminal \u00e9 usado para mudar de uma branch para outra?",
+      "back": "git checkout nome-da-branch"
+    },
+    {
+      "front": "Para juntar a branch 'nova-feature' na sua branch atual 'main', qual comando voc\u00ea usaria?",
+      "back": "git merge nova-feature"
+    },
+    {
+      "front": "Para visualizar o hist\u00f3rico de commits de forma gr\u00e1fica, mostrando as ramifica\u00e7\u00f5es e merges, voc\u00ea pode usar o comando `git log _____`.",
+      "back": "--graph"
+    },
+    {
+      "front": "O que \u00e9 um 'Pull Request' (PR) no GitHub?",
+      "back": "\u00c9 um mecanismo para propor altera\u00e7\u00f5es em um reposit\u00f3rio, solicitando que o dono do projeto revise e incorpore suas contribui\u00e7\u00f5es (fa\u00e7a o 'merge')."
+    },
+    {
+      "front": "Qual \u00e9 o principal objetivo de um Pull Request no fluxo de trabalho em equipe?",
+      "back": "Facilitar a revis\u00e3o de c\u00f3digo ('code review') antes que as altera\u00e7\u00f5es sejam mescladas na branch principal, garantindo a qualidade e evitando erros."
+    },
+    {
+      "front": "Como voc\u00ea pode adicionar um colega para colaborar diretamente no seu reposit\u00f3rio do GitHub?",
+      "back": "Acessando as Configura\u00e7\u00f5es (Settings) do reposit\u00f3rio, na se\u00e7\u00e3o 'Collaborators', e convidando-o pelo nome de usu\u00e1rio ou e-mail."
+    },
+    {
+      "front": "\u00c9 poss\u00edvel resolver conflitos de merge diretamente na interface web do GitHub durante um Pull Request?",
+      "back": "Sim, a interface do GitHub oferece um editor para resolver conflitos simples diretamente no navegador, se voc\u00ea for o propriet\u00e1rio do reposit\u00f3rio."
+    },
+    {
+      "front": "Para personalizar a p\u00e1gina do seu perfil no GitHub com uma descri\u00e7\u00e3o detalhada, voc\u00ea deve criar um reposit\u00f3rio especial. Qual deve ser o nome desse reposit\u00f3rio?",
+      "back": "Deve ter o mesmo nome do seu nome de usu\u00e1rio no GitHub."
+    },
+    {
+      "front": "Qual arquivo, dentro do reposit\u00f3rio de perfil, \u00e9 usado para exibir o conte\u00fado na sua p\u00e1gina de perfil do GitHub?",
+      "back": "O arquivo `README.md`."
+    },
+    {
+      "front": "A sintaxe usada para formatar texto em arquivos `.md`, como o `README.md`, \u00e9 chamada de _____.",
+      "back": "Markdown"
+    },
+    {
+      "front": "O que s\u00e3o 'reposit\u00f3rios pinados' (pinned repositories) no perfil do GitHub?",
+      "back": "S\u00e3o reposit\u00f3rios que voc\u00ea escolhe destacar no topo do seu perfil, funcionando como um portf\u00f3lio dos seus projetos mais importantes."
+    },
+    {
+      "front": "Qual \u00e9 uma alternativa ao uso de Personal Access Tokens (PAT) para autentica\u00e7\u00e3o segura com o GitHub?",
+      "back": "A autentica\u00e7\u00e3o via chave SSH."
+    },
+    {
+      "front": "Como funciona a autentica\u00e7\u00e3o com chave SSH?",
+      "back": "Uma chave p\u00fablica \u00e9 adicionada \u00e0 sua conta do GitHub, enquanto a chave privada fica no seu computador, criando uma conex\u00e3o criptografada para autentica\u00e7\u00e3o."
+    },
+    {
+      "front": "Qual comando \u00e9 usado para gerar um par de chaves SSH no terminal?",
+      "back": "ssh-keygen"
+    },
+    {
+      "front": "Ao clonar um reposit\u00f3rio usando o protocolo SSH, a URL ter\u00e1 o formato `git clone _____`.",
+      "back": "git@github.com:usuario/nome-do-repositorio.git"
+    },
+    {
+      "front": "Descreva o fluxo de trabalho b\u00e1sico para contribuir com um projeto de c\u00f3digo aberto usando 'fork'.",
+      "back": "Fazer o fork do reposit\u00f3rio, clonar o seu fork, criar uma nova branch, fazer as altera\u00e7\u00f5es, enviar (push) para o seu fork e, por fim, abrir um Pull Request para o reposit\u00f3rio original."
+    }
+  ]
+}
