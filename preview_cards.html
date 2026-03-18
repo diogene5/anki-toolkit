@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview — Anki Cards v2</title>
+<style>
+  /* === PAGE SHELL (not part of Anki CSS) === */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background: #0c0c14;
+    color: #cdd6f4;
+    padding: 48px 20px;
+  }
+  h1 {
+    text-align: center; margin-bottom: 4px; font-size: 20px;
+    color: #b4befe; font-weight: 600; letter-spacing: -0.3px;
+  }
+  .subtitle {
+    text-align: center; margin-bottom: 48px; color: #585b70;
+    font-size: 13px; letter-spacing: 0.2px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 640px;
+    margin: 0 auto;
+    gap: 40px;
+  }
+  .section-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.8px;
+    color: #585b70; margin-bottom: 12px; font-weight: 500;
+  }
+  .version-tag {
+    display: inline-block; font-size: 10px; text-transform: uppercase;
+    letter-spacing: 1px; padding: 3px 8px; border-radius: 3px;
+    margin-bottom: 10px; font-weight: 600;
+  }
+  .v-old { background: rgba(243,139,168,0.12); color: #f38ba8; }
+  .v-new { background: rgba(166,227,161,0.12); color: #a6e3a1; }
+  .compare-row { display: grid; gap: 12px; }
+
+  /*
+   * ══════════════════════════════════════════════════════════════
+   * ANKI CARD CSS — "Terminal Scholar" theme
+   * ══════════════════════════════════════════════════════════════
+   *
+   * This is the CSS that lives inside the Anki note type.
+   * Constraints:
+   *   - No external fonts (system stack only)
+   *   - No JavaScript
+   *   - Must work in Qt WebEngine (Chromium 87+)
+   *   - Single <style> block per note type
+   *
+   * Design principles:
+   *   1. HIGH CONTRAST question text — you scan this in <1 second
+   *   2. Structured answers — visual chunks, not walls of text
+   *   3. Code that POPS — the whole point of these cards
+   *   4. Clear Q→A boundary — the divider is a landmark
+   *   5. Callouts that feel native — not bolted on
+   */
+
+  .card {
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    text-align: left;
+    color: #bac2de;
+    background-color: #181825;
+    padding: 28px 24px;
+    border-radius: 10px;
+    border: 1px solid rgba(69, 71, 90, 0.6);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.3),
+      0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  /* ── Question (front) ── */
+  .front {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #cdd6f4;
+    letter-spacing: -0.15px;
+  }
+
+  /* ── Answer (back) ── */
+  .back {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #a6adc8;
+  }
+  .back b, .back strong {
+    color: #cdd6f4;
+    font-weight: 600;
+  }
+
+  /* ── Divider — the most important landmark ── */
+  hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #45475a 15%,
+      #585b70 50%,
+      #45475a 85%,
+      transparent 100%
+    );
+    margin: 20px 0;
+  }
+
+  /* ── Inline code ── */
+  code {
+    font-family: "SF Mono", "Cascadia Code", "Fira Code", "JetBrains Mono", ui-monospace, monospace;
+    font-size: 0.88em;
+    color: #94e2d5;
+    background: rgba(49, 50, 68, 0.7);
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(69, 71, 90, 0.5);
+    font-variant-ligatures: none;
+  }
+
+  /* ── Code blocks ── */
+  pre {
+    background: #11111b;
+    padding: 16px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(49, 50, 68, 0.8);
+    overflow-x: auto;
+    margin: 12px 0;
+    position: relative;
+  }
+  pre code {
+    padding: 0;
+    background: none;
+    border: none;
+    color: #a6e3a1;
+    font-size: 13px;
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Tip callout ── */
+  .tip {
+    background: rgba(166, 227, 161, 0.06);
+    border-left: 2px solid rgba(166, 227, 161, 0.5);
+    padding: 10px 14px;
+    margin: 12px 0 4px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #a6adc8;
+  }
+  .tip code {
+    font-size: 0.9em;
+    color: #a6e3a1;
+  }
+
+  /* ── Warning callout ── */
+  .warn {
+    background: rgba(249, 226, 175, 0.06);
+    border-left: 2px solid rgba(249, 226, 175, 0.5);
+    padding: 10px 14px;
+    margin: 12px 0 4px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #a6adc8;
+  }
+  .warn code {
+    color: #f9e2af;
+  }
+
+  /* ── Night mode override (Anki adds .nightMode to body) ── */
+  .nightMode .card {
+    background-color: #181825;
+  }
+
+  /* ── Mobile: slightly larger touch targets ── */
+  @media (max-width: 480px) {
+    .card { padding: 22px 18px; font-size: 14px; }
+    .front { font-size: 16px; }
+    pre { padding: 14px; }
+    pre code { font-size: 12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Anki Card Templates v2</h1>
+<p class="subtitle">Terminal Scholar — Catppuccin Mocha</p>
+
+<div class="grid">
+
+  <!-- QUESTION ONLY -->
+  <div>
+    <div class="section-label">Card Basic — Frente</div>
+    <div class="card">
+      <div class="front">Qual a diferença entre <code>git reset</code> e <code>git revert</code>?</div>
+    </div>
+  </div>
+
+  <!-- FULL ANSWER -->
+  <div>
+    <div class="section-label">Card Basic — Verso</div>
+    <div class="card">
+      <div class="front">Qual a diferença entre <code>git reset</code> e <code>git revert</code>?</div>
+      <hr>
+      <div class="back">
+        <b>reset</b>: apaga commits do histórico (reescreve)<br>
+        → Use em commits <b>locais</b> não publicados<br><br>
+        <b>revert</b>: cria um NOVO commit que desfaz o anterior<br>
+        <code>git revert abc1234</code><br>
+        → Use em commits <b>já publicados</b> (safe)
+      </div>
+    </div>
+  </div>
+
+  <!-- CODE BLOCK -->
+  <div>
+    <div class="section-label">Card Basic — Bloco de código</div>
+    <div class="card">
+      <div class="front">Como criar uma função em bash?</div>
+      <hr>
+      <div class="back">
+        <pre><code>backup() {
+  local origem=$1
+  local destino=$2
+  cp -r "$origem" "$destino"
+  echo "Backup de $origem feito!"
+}
+
+backup ~/docs ~/backup/</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIP -->
+  <div>
+    <div class="section-label">Card Basic — Com dica</div>
+    <div class="card">
+      <div class="front">Diferença entre <code>git pull</code> e <code>git fetch</code>?</div>
+      <hr>
+      <div class="back">
+        <code>git fetch</code> — baixa mudanças remotas mas <b>não aplica</b><br>
+        <code>git pull</code> — fetch + merge (aplica as mudanças)<br><br>
+        <div class="tip">💡 <code>git pull --rebase</code> é mais limpo: reaplica seus commits em cima das mudanças remotas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARNING -->
+  <div>
+    <div class="section-label">Card Basic — Com aviso</div>
+    <div class="card">
+      <div class="front">Como desfazer o último commit (mantendo as mudanças)?</div>
+      <hr>
+      <div class="back">
+        <code>git reset --soft HEAD~1</code> — volta um commit, mantém staging<br>
+        <code>git reset HEAD~1</code> — volta um commit, mantém no working dir<br><br>
+        <div class="warn">⚠️ <code>git reset --hard HEAD~1</code> APAGA tudo. Cuidado!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIADE PYTHON -->
+  <div>
+    <div class="section-label">Card Tríade — Direção Python</div>
+    <div class="card">
+      <div class="front">🐍 Como fazer em <b>Python/pandas</b>:<br><br>Filtrar linhas por condição</div>
+      <hr>
+      <div class="back">
+        <code>df[df['idade'] > 18]</code><br>ou<br><code>df.query('idade > 18')</code>
+        <div class="tip">📊 Planilha: Ícone de filtro → selecionar valores<br>Ou: Dados > Filtro Avançado</div>
+        <div class="tip">🗄️ SQL: <code>SELECT * FROM tabela WHERE idade > 18</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRIADE SQL -->
+  <div>
+    <div class="section-label">Card Tríade — Direção SQL</div>
+    <div class="card">
+      <div class="front">🗄️ Como fazer em <b>SQL</b>:<br><br>Juntar duas tabelas (PROCV/VLOOKUP)</div>
+      <hr>
+      <div class="back">
+        <code>SELECT * FROM tabela1<br>LEFT JOIN tabela2<br>ON tabela1.id = tabela2.id</code>
+        <div class="tip">🐍 Python: <code>pd.merge(df1, df2, on='id', how='left')</code></div>
+        <div class="tip">📊 Planilha: <code>=PROCV(A2; Tabela2; 2; FALSO)</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div>
+    <div class="section-label">Comparação — Antes vs Depois</div>
+    <div class="compare-row">
+      <div>
+        <span class="version-tag v-old">Antes</span>
+        <div class="card" style="border-color: rgba(243,139,168,0.3); background: #1e1e2e;">
+          <div class="front" style="color: #bac2de; font-weight: 400;">Como adicionar todos os arquivos modificados para commit?</div>
+          <hr>
+          <div class="back" style="font-family: sans-serif; color: #7f849c;">
+            git add .<br>Ou, para selecionar arquivos individuais: git add nome_do_arquivo
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="version-tag v-new">Depois</span>
+        <div class="card" style="border-color: rgba(166,227,161,0.3);">
+          <div class="front">Como adicionar arquivos para commit?</div>
+          <hr>
+          <div class="back">
+            <code>git add arquivo.py</code> — arquivo específico<br>
+            <code>git add .</code> — tudo no diretório atual<br>
+            <code>git add -p</code> — interativo (escolhe pedaços)<br><br>
+            <div class="warn">⚠️ Evite <code>git add .</code> cegamente — revise com <code>git status</code> antes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

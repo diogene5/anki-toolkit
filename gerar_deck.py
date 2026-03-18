@@ -68,16 +68,27 @@ BASIC_MODEL = genanki.Model(
         'qfmt': '<div class="front">{{Frente}}</div>',
         'afmt': '<div class="front">{{Frente}}</div><hr id="answer"><div class="back">{{Verso}}</div>',
     }],
+    # CSS v2 — "Terminal Scholar" theme (Catppuccin Mocha)
+    # Otimizado para scan rápido durante sessões de estudo:
+    # - Pergunta com peso visual alto (600 weight, cor mais clara)
+    # - Código com borda sutil para destacar do texto
+    # - Divider com gradiente (landmark visual Q→A)
+    # - Callouts semi-transparentes (integrados, não bolted-on)
     css='''
-    .card { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; text-align: left; color: #e0e0e0; background-color: #1e1e2e; padding: 20px; }
-    .front { font-size: 18px; font-weight: 500; }
-    .back { font-size: 16px; line-height: 1.6; }
-    code { background: #313244; padding: 2px 6px; border-radius: 4px; font-family: "SF Mono", "Fira Code", monospace; font-size: 14px; color: #a6e3a1; }
-    pre { background: #313244; padding: 12px; border-radius: 8px; overflow-x: auto; }
-    pre code { padding: 0; background: none; }
-    hr { border: none; border-top: 1px solid #45475a; margin: 16px 0; }
-    .tip { background: #1e3a2f; border-left: 3px solid #a6e3a1; padding: 8px 12px; margin: 8px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
-    .warn { background: #3a2f1e; border-left: 3px solid #f9e2af; padding: 8px 12px; margin: 8px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+    .card { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.55; text-align: left; color: #bac2de; background-color: #181825; padding: 28px 24px; }
+    .front { font-size: 17px; font-weight: 600; line-height: 1.45; color: #cdd6f4; letter-spacing: -0.15px; }
+    .back { font-size: 15px; line-height: 1.65; color: #a6adc8; }
+    .back b, .back strong { color: #cdd6f4; font-weight: 600; }
+    code { font-family: "SF Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace; font-size: 0.88em; color: #94e2d5; background: rgba(49,50,68,0.7); padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(69,71,90,0.5); }
+    pre { background: #11111b; padding: 16px 18px; border-radius: 8px; border: 1px solid rgba(49,50,68,0.8); overflow-x: auto; margin: 12px 0; }
+    pre code { padding: 0; background: none; border: none; color: #a6e3a1; font-size: 13px; line-height: 1.7; letter-spacing: 0.3px; }
+    hr { border: none; height: 1px; background: linear-gradient(90deg, transparent 0%, #45475a 15%, #585b70 50%, #45475a 85%, transparent 100%); margin: 20px 0; }
+    .tip { background: rgba(166,227,161,0.06); border-left: 2px solid rgba(166,227,161,0.5); padding: 10px 14px; margin: 12px 0 4px; border-radius: 0 6px 6px 0; font-size: 13.5px; line-height: 1.55; color: #a6adc8; }
+    .tip code { font-size: 0.9em; color: #a6e3a1; }
+    .warn { background: rgba(249,226,175,0.06); border-left: 2px solid rgba(249,226,175,0.5); padding: 10px 14px; margin: 12px 0 4px; border-radius: 0 6px 6px 0; font-size: 13.5px; line-height: 1.55; color: #a6adc8; }
+    .warn code { color: #f9e2af; }
+    .nightMode .card { background-color: #181825; }
+    @media (max-width: 480px) { .card { padding: 22px 18px; font-size: 14px; } .front { font-size: 16px; } pre { padding: 14px; } pre code { font-size: 12.5px; } }
     '''
 )
 
@@ -103,14 +114,18 @@ TRIADE_MODEL = genanki.Model(
         },
     ],
     css='''
-    .card { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 16px; text-align: left; color: #e0e0e0; background-color: #1e1e2e; padding: 20px; }
-    .front { font-size: 18px; font-weight: 500; line-height: 1.5; }
-    .back { font-size: 16px; line-height: 1.6; }
-    code { background: #313244; padding: 2px 6px; border-radius: 4px; font-family: "SF Mono", "Fira Code", monospace; font-size: 14px; color: #a6e3a1; }
-    pre { background: #313244; padding: 12px; border-radius: 8px; overflow-x: auto; }
-    pre code { padding: 0; background: none; }
-    hr { border: none; border-top: 1px solid #45475a; margin: 16px 0; }
-    .tip { background: #1e3a2f; border-left: 3px solid #a6e3a1; padding: 8px 12px; margin: 8px 0; border-radius: 0 4px 4px 0; font-size: 14px; }
+    .card { font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 15px; line-height: 1.55; text-align: left; color: #bac2de; background-color: #181825; padding: 28px 24px; }
+    .front { font-size: 17px; font-weight: 600; line-height: 1.45; color: #cdd6f4; letter-spacing: -0.15px; }
+    .back { font-size: 15px; line-height: 1.65; color: #a6adc8; }
+    .back b, .back strong { color: #cdd6f4; font-weight: 600; }
+    code { font-family: "SF Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace; font-size: 0.88em; color: #94e2d5; background: rgba(49,50,68,0.7); padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(69,71,90,0.5); }
+    pre { background: #11111b; padding: 16px 18px; border-radius: 8px; border: 1px solid rgba(49,50,68,0.8); overflow-x: auto; margin: 12px 0; }
+    pre code { padding: 0; background: none; border: none; color: #a6e3a1; font-size: 13px; line-height: 1.7; letter-spacing: 0.3px; }
+    hr { border: none; height: 1px; background: linear-gradient(90deg, transparent 0%, #45475a 15%, #585b70 50%, #45475a 85%, transparent 100%); margin: 20px 0; }
+    .tip { background: rgba(166,227,161,0.06); border-left: 2px solid rgba(166,227,161,0.5); padding: 10px 14px; margin: 12px 0 4px; border-radius: 0 6px 6px 0; font-size: 13.5px; line-height: 1.55; color: #a6adc8; }
+    .tip code { font-size: 0.9em; color: #a6e3a1; }
+    .nightMode .card { background-color: #181825; }
+    @media (max-width: 480px) { .card { padding: 22px 18px; font-size: 14px; } .front { font-size: 16px; } pre { padding: 14px; } pre code { font-size: 12.5px; } }
     '''
 )
 
