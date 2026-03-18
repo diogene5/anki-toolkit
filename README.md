@@ -66,6 +66,7 @@ python3 gerar_deck_meta.py
 ### Integração NotebookLM → Anki
 
 ```bash
+# ── Flashcards ──
 # Converter 1 notebook
 python3 scripts/notebooklm_to_anki.py dados/flashcards.json --deck "NLM::Git"
 
@@ -75,9 +76,41 @@ python3 scripts/notebooklm_to_anki.py --download --notebook <id>
 # Batch: baixar todos os notebooks com flashcards
 python3 scripts/batch_nlm_download.py
 
-# Organizar por categoria (Programação, Medicina, Data, etc.)
+# Organizar flashcards por categoria
 python3 scripts/batch_por_categoria.py
+
+# ── Quizzes (múltipla escolha) ──
+# Converter 1 quiz
+python3 scripts/quiz_to_anki.py dados/nlm_git_quiz.json --deck "NLM::Quiz::Git"
+
+# Escanear e baixar quizzes de todos os notebooks
+python3 scripts/quiz_to_anki.py --scan
+
+# Organizar quizzes por categoria
+python3 scripts/quiz_to_anki.py --categorize
 ```
+
+### Pipeline completo
+
+```mermaid
+flowchart LR
+    A[NotebookLM<br/>210 notebooks] -->|flashcards| B[batch_nlm_download.py]
+    A -->|quizzes| C[quiz_to_anki.py --scan]
+    B --> D[batch_por_categoria.py]
+    C --> E[quiz_to_anki.py --categorize]
+    D --> F[NLM-Programação.apkg<br/>NLM-Medicina.apkg<br/>NLM-Data.apkg<br/>...]
+    E --> G[Quiz-Programação.apkg<br/>Quiz-Medicina.apkg<br/>Quiz-Data.apkg<br/>...]
+    F --> H[Anki<br/>File > Import]
+    G --> H
+```
+
+### Decks disponíveis (6306 cards total)
+
+| Tipo | Categorias | Cards |
+|------|-----------|-------|
+| Flashcards (NLM-\*) | Programação, Medicina, Data, Ferramentas, Gestão, Finanças, Outros | 5349 |
+| Quizzes (Quiz-\*) | Programação, Medicina, Data, Ferramentas, Gestão, Finanças, Outros | 781 |
+| Custom (Dev, Meta) | Programação, Meta-Anki | 176 |
 
 ## Como o Anki armazena dados
 

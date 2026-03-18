@@ -97,9 +97,10 @@ anki/
 │   ├── limpar_colecao.py            # Remove note types/decks sem uso
 │   ├── importar_csv.py              # Gera CSVs prontos para importação
 │   ├── comparar_decks.py            # Qualidade + sobreposições entre decks
-│   ├── notebooklm_to_anki.py        # Converter 1 notebook NLM → .apkg
+│   ├── notebooklm_to_anki.py        # Converter 1 notebook NLM flashcards → .apkg
+│   ├── quiz_to_anki.py              # Converter NLM quizzes (múltipla escolha) → .apkg
 │   ├── batch_nlm_download.py        # Baixar flashcards de N notebooks
-│   └── batch_por_categoria.py       # Organizar por categoria temática
+│   └── batch_por_categoria.py       # Organizar flashcards por categoria temática
 ├── gerar_deck.py                    # Deck Dev_Programacao.apkg (142 cards)
 ├── gerar_deck_meta.py               # Deck Meta_Anki_Flashcards.apkg (34 cards)
 ├── preview_cards.html               # Preview visual dos cards no browser
@@ -156,8 +157,13 @@ python3 scripts/notebooklm_to_anki.py dados/nlm_flashcards.json --deck "NLM::Git
 python3 scripts/notebooklm_to_anki.py --download --notebook <id>
 
 # Batch: converter todos os notebooks com flashcards
-python3 scripts/batch_nlm_download.py            # baixar JSONs
-python3 scripts/batch_por_categoria.py           # categorizar e gerar .apkg
+python3 scripts/batch_nlm_download.py            # baixar JSONs flashcards
+python3 scripts/batch_por_categoria.py           # categorizar → NLM-*.apkg
+
+# Quizzes (múltipla escolha com rationale)
+python3 scripts/quiz_to_anki.py dados/quiz.json  # converter 1 quiz
+python3 scripts/quiz_to_anki.py --scan           # baixar quizzes de todos os notebooks
+python3 scripts/quiz_to_anki.py --categorize     # categorizar → Quiz-*.apkg
 
 # Importar no Anki: File > Import > selecionar .apkg
 ```
@@ -177,7 +183,7 @@ python3 scripts/batch_por_categoria.py           # categorizar e gerar .apkg
 
 - Biblioteca para criar .apkg sem Anki instalado
 - `random.seed()` DEVE ser diferente por gerador para evitar GUID collisions
-- Seeds em uso: 42 (gerar_deck), 77 (notebooklm_to_anki), 78 (batch_nlm_download), 79 (batch_por_categoria), 99 (gerar_deck_meta)
+- Seeds em uso: 42 (gerar_deck), 77 (notebooklm_to_anki), 78 (batch_nlm_download), 79 (batch_por_categoria), 88 (quiz_to_anki), 99 (gerar_deck_meta)
 - Model IDs devem ser fixos e únicos — nunca mudar depois de importar
 
 ### NotebookLM

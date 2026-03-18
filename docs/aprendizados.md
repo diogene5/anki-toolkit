@@ -147,18 +147,72 @@ genanki.Package([deck]).write_to_file('output.apkg')
 
 ```mermaid
 flowchart LR
-    A[NotebookLM<br/>210 notebooks] -->|generate flashcards| B[JSON]
-    B -->|notebooklm_to_anki.py| C[.apkg]
-    C -->|File > Import| D[Anki]
+    A[NotebookLM<br/>210 notebooks] -->|flashcards| B[JSON flashcards]
+    A -->|quizzes| C[JSON quizzes]
+    B -->|batch_por_categoria.py| D[NLM-*.apkg<br/>5349 cards]
+    C -->|quiz_to_anki.py| E[Quiz-*.apkg<br/>781 questões]
+    D --> F[Anki]
+    E --> F
 ```
 
 ```bash
-# Uma linha:
-python3 scripts/notebooklm_to_anki.py --download --notebook <id>
+# Flashcards em lote:
+python3 scripts/batch_nlm_download.py     # baixar JSONs
+python3 scripts/batch_por_categoria.py    # categorizar → .apkg
 
-# Em lote:
-python3 scripts/notebooklm_to_anki.py --all
+# Quizzes em lote:
+python3 scripts/quiz_to_anki.py --scan       # baixar JSONs
+python3 scripts/quiz_to_anki.py --categorize # categorizar → .apkg
 ```
+
+### Quizzes (Múltipla Escolha)
+
+O NotebookLM gera quizzes em formato diferente dos flashcards:
+
+```json
+{
+  "questions": [{
+    "question": "Pergunta aqui",
+    "answerOptions": [
+      {"text": "Opção A", "isCorrect": false, "rationale": "Por que errada"},
+      {"text": "Opção B", "isCorrect": true,  "rationale": "Por que certa"}
+    ],
+    "hint": "Dica"
+  }]
+}
+```
+
+O `quiz_to_anki.py` converte para Anki com:
+- **Frente**: pergunta + opções A/B/C/D (sem indicar a correta)
+- **Verso**: resposta destacada em verde + rationale de CADA opção
+
+> [!tip] Quizzes são melhores que Cloze para conceitos: múltipla escolha com rationale ensina o **raciocínio** (por que A está errada, por que B está certa), não só memorização.
+
+### Categorização
+
+As regras de categorização vivem em `shared.py` → constante `CATEGORIAS`. A função `categorizar(titulo, filename)` busca padrões no título E no nome do arquivo (fallback para quizzes com títulos genéricos).
+
+| Categoria | Padrões (exemplos) |
+|-----------|-------------------|
+| Programação | CS50, Python, Git, SQL, Shell, CLI, ASIMOV, akita, Crontab |
+| Medicina | Via Aérea, ACLS, ECG, Intub, Sepse, Farmacologia, Laringoscopia |
+| Data | P2P, DAX, Power, Dashboard, Estatística, Warehouse |
+| Ferramentas | Obsidian, Zotero, Hazel, Johnny Decimal, QuickAdd |
+| Gestão | Lean, SBIS, Prontuário, Quality, Operações |
+| Finanças | Investimento, Tesouro, Renda Fixa |
+
+### Seeds por gerador
+
+Cada script usa uma seed diferente para evitar colisão de GUIDs:
+
+| Script | Seed | Tipo |
+|--------|------|------|
+| gerar_deck.py | 42 | Deck Dev (programação) |
+| notebooklm_to_anki.py | 77 | NLM flashcards (individual) |
+| batch_nlm_download.py | 78 | NLM flashcards (batch) |
+| batch_por_categoria.py | 79 | NLM flashcards (categorizado) |
+| quiz_to_anki.py | 88 | NLM quizzes |
+| gerar_deck_meta.py | 99 | Deck Meta (sobre o Anki) |
 
 ## 4. Design de Flashcards Eficazes
 
@@ -227,10 +281,11 @@ Acima de 40% de palavras em comum → provável duplicata.
 | `limpar_colecao.py` | Remove note types/decks sem uso | `--dry-run` ou `--auto` |
 | `importar_csv.py` | Gera CSVs prontos para importação | Sem args = exemplos |
 | `comparar_decks.py` | Qualidade + sobreposições | `--deck "Git"` |
-| `notebooklm_to_anki.py` | NotebookLM → .apkg | `--all` ou `--download` |
+| `notebooklm_to_anki.py` | NLM flashcards → .apkg | `--all` ou `--download` |
+| `quiz_to_anki.py` | NLM quizzes → .apkg | `--scan`, `--categorize` |
 | `batch_nlm_download.py` | Baixa flashcards de N notebooks | `--merge` ou `--limit 10` |
-| `batch_por_categoria.py` | Organiza por categoria temática | `--categoria Programação` |
-| `shared.py` | Módulo compartilhado (CSS, DB, utils) | Importado pelos outros scripts |
+| `batch_por_categoria.py` | Organiza flashcards por categoria | `--categoria Programação` |
+| `shared.py` | Módulo compartilhado (CSS, DB, categorização, utils) | Importado pelos outros scripts |
 | `gerar_deck.py` | Deck Dev (142 cards) | Direto |
 | `gerar_deck_meta.py` | Deck Meta (34 cards) | Direto |
 
