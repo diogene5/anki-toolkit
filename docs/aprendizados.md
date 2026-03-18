@@ -228,10 +228,40 @@ Acima de 40% de palavras em comum → provável duplicata.
 | `importar_csv.py` | Gera CSVs prontos para importação | Sem args = exemplos |
 | `comparar_decks.py` | Qualidade + sobreposições | `--deck "Git"` |
 | `notebooklm_to_anki.py` | NotebookLM → .apkg | `--all` ou `--download` |
+| `batch_nlm_download.py` | Baixa flashcards de N notebooks | `--merge` ou `--limit 10` |
+| `batch_por_categoria.py` | Organiza por categoria temática | `--categoria Programação` |
+| `shared.py` | Módulo compartilhado (CSS, DB, utils) | Importado pelos outros scripts |
 | `gerar_deck.py` | Deck Dev (142 cards) | Direto |
 | `gerar_deck_meta.py` | Deck Meta (34 cards) | Direto |
 
-## 7. Workflow com Git
+## 7. Arquitetura: Módulo Compartilhado (`shared.py`)
+
+```mermaid
+graph TD
+    S[scripts/shared.py] --> A[analisar_colecao.py]
+    S --> L[limpar_colecao.py]
+    S --> N[notebooklm_to_anki.py]
+    S --> BD[batch_nlm_download.py]
+    S --> BC[batch_por_categoria.py]
+
+    S -->|CARD_CSS| N
+    S -->|CARD_CSS| BD
+    S -->|CARD_CSS| BC
+    S -->|conectar| A
+    S -->|conectar| L
+    S -->|enriquecer_html| N
+    S -->|enriquecer_html| BD
+    S -->|enriquecer_html| BC
+```
+
+O `shared.py` centraliza:
+- **CARD_CSS**: tema Terminal Scholar (Catppuccin Mocha) — uma única fonte de verdade
+- **create_model()**: cria o note type genanki com CSS consistente
+- **conectar(perfil)**: abre SQLite com collation unicase registrada
+- **enriquecer_html()**: detecta código em texto e envolve com `<code>` (7 patterns regex)
+- **safe_name() / limpar_titulo()**: sanitização de nomes de arquivo e títulos
+
+## 8. Workflow com Git
 
 ```bash
 # Editar cards → regenerar → importar

@@ -44,49 +44,8 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 
-
-# ─── Configuração ─────────────────────────────────────────────
-
-# O Anki registra uma "collation" customizada chamada 'unicase' para
-# comparações case-insensitive. O sqlite3 do Python não a conhece,
-# então precisamos registrar uma versão equivalente.
-# Sem isso, qualquer query com ORDER BY em colunas de texto falha.
-def unicase_collation(a: str, b: str) -> int:
-    """Collation case-insensitive compatível com Anki."""
-    a, b = a.lower(), b.lower()
-    return (a > b) - (a < b)  # retorna -1, 0 ou 1
-
-
-def get_anki_path(perfil: str = "Data") -> str:
-    """
-    Retorna o caminho para o banco de dados do Anki.
-
-    No macOS, os dados ficam em:
-      ~/Library/Application Support/Anki2/<perfil>/collection.anki2
-
-    Cada perfil é um diretório separado com seu próprio banco.
-    """
-    base = os.path.expanduser("~/Library/Application Support/Anki2")
-    db_path = os.path.join(base, perfil, "collection.anki2")
-    if not os.path.exists(db_path):
-        # Listar perfis disponíveis para ajudar o usuário
-        perfis = [d for d in os.listdir(base)
-                  if os.path.isdir(os.path.join(base, d))
-                  and not d.startswith('.')
-                  and d not in ('addons21', 'logs')]
-        raise FileNotFoundError(
-            f"Perfil '{perfil}' não encontrado.\n"
-            f"Perfis disponíveis: {', '.join(perfis)}\n"
-            f"Caminho esperado: {db_path}"
-        )
-    return db_path
-
-
-def conectar(perfil: str = "Data") -> sqlite3.Connection:
-    """Abre conexão com o banco do Anki, registrando a collation necessária."""
-    conn = sqlite3.connect(get_anki_path(perfil))
-    conn.create_collation("unicase", unicase_collation)
-    return conn
+# Funções de acesso ao banco Anki centralizadas em shared.py
+from shared import unicase_collation, get_anki_path, conectar
 
 
 # ─── Análise ──────────────────────────────────────────────────

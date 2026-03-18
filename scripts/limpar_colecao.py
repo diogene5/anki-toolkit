@@ -31,19 +31,8 @@ import os
 import argparse
 from datetime import datetime
 
-
-def unicase_collation(a: str, b: str) -> int:
-    return (a.lower() > b.lower()) - (a.lower() < b.lower())
-
-
-def conectar(perfil: str) -> sqlite3.Connection:
-    base = os.path.expanduser("~/Library/Application Support/Anki2")
-    db_path = os.path.join(base, perfil, "collection.anki2")
-    if not os.path.exists(db_path):
-        raise FileNotFoundError(f"Banco não encontrado: {db_path}")
-    conn = sqlite3.connect(db_path)
-    conn.create_collation("unicase", unicase_collation)
-    return conn
+# Funções de acesso ao banco Anki centralizadas em shared.py
+from shared import unicase_collation, conectar
 
 
 def fazer_backup(perfil: str) -> str:

@@ -47,70 +47,10 @@ import random
 
 random.seed(77)  # seed diferente dos outros geradores para evitar colisão de GUIDs
 
-# ─── CSS (mesmo tema Terminal Scholar dos outros decks) ────────
+# CSS, modelo e funções de texto centralizados em shared.py
+from shared import CARD_CSS, create_model, enriquecer_html, safe_name
 
-CARD_CSS = '''
-.card {
-  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  font-size: 15px; line-height: 1.6; text-align: left;
-  color: #bac2de; background-color: #181825;
-  padding: 28px 24px; max-width: 65ch; margin: 0 auto;
-}
-.front { font-size: 17px; font-weight: 600; line-height: 1.45; color: #cdd6f4; }
-.back { font-size: 15px; line-height: 1.65; color: #a6adc8; }
-.back b, .back strong { color: #cdd6f4; font-weight: 600; }
-code {
-  font-family: "SF Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace;
-  font-size: 0.88em; color: #94e2d5;
-  background: rgba(49,50,68,0.7); padding: 2px 7px;
-  border-radius: 4px; border: 1px solid rgba(69,71,90,0.5);
-}
-pre { background: #11111b; padding: 16px 18px; border-radius: 8px; border: 1px solid rgba(49,50,68,0.8); overflow-x: auto; margin: 12px 0; }
-pre code { padding: 0; background: none; border: none; color: #a6e3a1; font-size: 13px; line-height: 1.7; }
-hr { border: none; height: 1px; background: linear-gradient(90deg, transparent 0%, #45475a 15%, #585b70 50%, #45475a 85%, transparent 100%); margin: 20px 0; }
-.source { font-size: 12px; color: #585b70; margin-top: 12px; font-style: italic; }
-.nightMode .card { background-color: #181825; }
-@media (max-width: 480px) { .card { padding: 22px 18px; } .front { font-size: 16px; } }
-'''
-
-MODEL = genanki.Model(
-    1607392077,
-    'NotebookLM Import',
-    fields=[{'name': 'Frente'}, {'name': 'Verso'}],
-    templates=[{
-        'name': 'Card 1',
-        'qfmt': '<div class="front">{{Frente}}</div>',
-        'afmt': '<div class="front">{{Frente}}</div><hr id="answer"><div class="back">{{Verso}}</div>',
-    }],
-    css=CARD_CSS,
-)
-
-
-def enriquecer_html(texto: str) -> str:
-    """
-    Adiciona formatação HTML básica ao texto do NotebookLM.
-
-    O NotebookLM retorna texto plano. Este enriquecimento:
-    - Detecta comandos git/python e envolve com <code>
-    - Detecta blocos de código (linhas que parecem comandos)
-    - Preserva quebras de linha
-    """
-    # Detectar comandos inline entre backticks
-    texto = re.sub(r'`([^`]+)`', r'<code>\1</code>', texto)
-
-    # Detectar padrões de comandos comuns sem backticks
-    cmd_patterns = [
-        r'\b(git\s+\w+(?:\s+--?\w+)*)',
-        r'\b(ssh-keygen\b)',
-        r'\b(pip\s+install\s+\S+)',
-    ]
-    for pattern in cmd_patterns:
-        texto = re.sub(pattern, r'<code>\1</code>', texto)
-
-    # Evitar double-wrap
-    texto = texto.replace('<code><code>', '<code>').replace('</code></code>', '</code>')
-
-    return texto
+MODEL = create_model()
 
 
 def converter_json_para_apkg(
@@ -165,8 +105,8 @@ def converter_json_para_apkg(
         output_dir = str(Path(__file__).parent.parent / "output")
     os.makedirs(output_dir, exist_ok=True)
 
-    safe_name = re.sub(r'[^\w-]', '_', title)[:50]
-    output_path = os.path.join(output_dir, f"NLM_{safe_name}.apkg")
+    fname = safe_name(title)
+    output_path = os.path.join(output_dir, f"NLM_{fname}.apkg")
 
     package = genanki.Package([deck])
     package.write_to_file(output_path)
