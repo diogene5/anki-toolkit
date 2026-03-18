@@ -1,0 +1,372 @@
+{
+  "total_notebooks": 91,
+  "downloaded": 91,
+  "total_cards": 5361,
+  "errors": 0,
+  "decks": [
+    {
+      "name": "NLM::Pediatria",
+      "cards": 80
+    },
+    {
+      "name": "NLM::Guia Completo da Interface de Linha de Comando do Obsidian",
+      "cards": 65
+    },
+    {
+      "name": "NLM::Guia de Captura Rápida e Automação para Obsidian",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Guia PEM 11.0: Manual de Emergência Pediátrica NYU Langone",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Modelagem de Dados Completa",
+      "cards": 78
+    },
+    {
+      "name": "NLM::Lean nas Emergências: Guia de Eficiência e Transformação Ope",
+      "cards": 56
+    },
+    {
+      "name": "NLM::Requisitos para Certificação SBIS: Prontuário Eletrônico em ",
+      "cards": 65
+    },
+    {
+      "name": "NLM::P2P_completo: Patients2Python",
+      "cards": 155
+    },
+    {
+      "name": "NLM::Guia Completo da Interface de Linha de Comando do Obsidian",
+      "cards": 65
+    },
+    {
+      "name": "NLM::apegado_desapego etc",
+      "cards": 40
+    },
+    {
+      "name": "NLM::Johnny Decimal",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Identificação e Manejo da Via Aérea Falha",
+      "cards": 30
+    },
+    {
+      "name": "NLM::[Lean_Voitto] Yellow Belt Lean Six Sigma",
+      "cards": 143
+    },
+    {
+      "name": "NLM::Informática e Operações em Medicina de Emergência",
+      "cards": 64
+    },
+    {
+      "name": "NLM::medium _ modelagem de dados",
+      "cards": 34
+    },
+    {
+      "name": "NLM::Probabilidade Pré-Teste na Epidemiologia Clínica e Decisão M",
+      "cards": 43
+    },
+    {
+      "name": "NLM::Ambiente de Desenvolvimento: Vim, IDEs e IA no Código",
+      "cards": 57
+    },
+    {
+      "name": "NLM::Dominando o Shell: Ferramentas e Filosofia do Missing Semest",
+      "cards": 71
+    },
+    {
+      "name": "NLM::O Semestre Perdido: Introdução ao Shell e Automação de Taref",
+      "cards": 50
+    },
+    {
+      "name": "NLM::🫁 Sequencia rápida de intubação",
+      "cards": 64
+    },
+    {
+      "name": "NLM::Agentes de Indução Sedativa em Sequência Rápida de Intubação",
+      "cards": 73
+    },
+    {
+      "name": "NLM::Dispositivos Extraglóticos no Manejo da Via Aérea de Emergên",
+      "cards": 71
+    },
+    {
+      "name": "NLM::Técnicas de Manejo da Via Aérea Pediátrica",
+      "cards": 69
+    },
+    {
+      "name": "NLM::Laringoscopia Direta: Técnicas, Equipamentos e Anatomia Apli",
+      "cards": 67
+    },
+    {
+      "name": "NLM::Algoritmos de Manejo da Via Aérea na Emergência",
+      "cards": 68
+    },
+    {
+      "name": "NLM::Manual Walls de Manejo da Via Aérea na Emergência",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Abordagem Clínica e Manejo do Paciente com Dispneia",
+      "cards": 75
+    },
+    {
+      "name": "NLM::Guia de Suporte Básico de Vida e Ressuscitação Cardiopulmona",
+      "cards": 70
+    },
+    {
+      "name": "NLM::Diretrizes de Suporte Avançado de Vida Cardiovascular AHA 20",
+      "cards": 77
+    },
+    {
+      "name": "NLM::Manejo da Via Aérea no Trauma: Estratégias e Procedimentos",
+      "cards": 69
+    },
+    {
+      "name": "NLM::[REF] Doc-as-code",
+      "cards": 60
+    },
+    {
+      "name": "NLM::[EM] Tratamento da Cetoacidose Diabética e Estado Hiperosmol",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Ventilação com Bolsa-Válvula-Máscara: Técnicas e Manejo de E",
+      "cards": 57
+    },
+    {
+      "name": "NLM::[Obsidian] [Dee] Obsidian PKM: Fluxo Completo de Notas Diári",
+      "cards": 60
+    },
+    {
+      "name": "NLM::[Obsidian] [Dee] Base: Organização Dinâmica de Notas no Obsi",
+      "cards": 55
+    },
+    {
+      "name": "NLM::[Obsidian] Fluxo de Trabalho Digital e Escrita da História",
+      "cards": 70
+    },
+    {
+      "name": "NLM::Manejo da Via Aérea no Paciente com Obesidade Mórbida",
+      "cards": 62
+    },
+    {
+      "name": "NLM::P2P_ment_expl_TUDO: Dominando Medidas DAX: Cálculo e Context",
+      "cards": 68
+    },
+    {
+      "name": "NLM::DS-CLI 9",
+      "cards": 54
+    },
+    {
+      "name": "NLM::P2P_ment_expl_11: Power Query e Power Pivot: O ETL no Power ",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Segredos para o Movimento de Ombros na Salsa e Ritmos Latino",
+      "cards": 22
+    },
+    {
+      "name": "NLM::[REF] Hazel User Guide",
+      "cards": 67
+    },
+    {
+      "name": "NLM::DS-CLI 10",
+      "cards": 22
+    },
+    {
+      "name": "NLM::DS-CLI 2",
+      "cards": 37
+    },
+    {
+      "name": "NLM::DS-CLI 7",
+      "cards": 19
+    },
+    {
+      "name": "NLM::DS-CLI 6",
+      "cards": 32
+    },
+    {
+      "name": "NLM::DS-CLI 5",
+      "cards": 38
+    },
+    {
+      "name": "NLM::DS-CLI 3",
+      "cards": 67
+    },
+    {
+      "name": "NLM::Keyboard Maestro Wiki: User Guide and Reference",
+      "cards": 72
+    },
+    {
+      "name": "NLM::Estratégias de Investimento: Renda Fixa e Variável",
+      "cards": 50
+    },
+    {
+      "name": "NLM::P2P_ment_expl_12: Dominando Medidas DAX: O Essencial da Anál",
+      "cards": 32
+    },
+    {
+      "name": "NLM::CS50x 2024 - Lecture 2 - Arrays: Arrays, Memória e o Process",
+      "cards": 50
+    },
+    {
+      "name": "NLM::CS50x 2024 - Lecture 0 - Scratch: Fundamentos, Binário e Abs",
+      "cards": 50
+    },
+    {
+      "name": "NLM::CS50x 2024 - Lecture 3 - Algorithms: A Arte da Busca, Ordena",
+      "cards": 46
+    },
+    {
+      "name": "NLM::CS50x 2024 - Lecture 1 - C: Variáveis, Loops e Limites da Co",
+      "cards": 66
+    },
+    {
+      "name": "NLM::[MBE] MBE José Alencar",
+      "cards": 76
+    },
+    {
+      "name": "NLM::P2P_ment_pro_6: Construção de Data Warehouse e Consultas SQL",
+      "cards": 40
+    },
+    {
+      "name": "NLM::P2P_ment_pro_8: Estatística Inferencial: Probabilidade e Mod",
+      "cards": 45
+    },
+    {
+      "name": "NLM::P2P_ment_pro_10: Testes de Hipótese e Poder Estatístico.",
+      "cards": 45
+    },
+    {
+      "name": "NLM::P2P_ment_pro_12: Teste de Hipóteses e Cálculo Amostral em Pe",
+      "cards": 50
+    },
+    {
+      "name": "NLM::P2P_ment_expl_02: IA Generativa: Do Prompt à Análise de Dado",
+      "cards": 58
+    },
+    {
+      "name": "NLM::P2P_ment_expl_07: Saúde Analítica: Estrutura, Estratégia e F",
+      "cards": 41
+    },
+    {
+      "name": "NLM::P2P_ment_expl_06: Matriz de Indicadores: Da Métrica à Ação",
+      "cards": 40
+    },
+    {
+      "name": "NLM::P2P_ment_expl_01: Medicina e Gestão: A Nova Cultura de Dados",
+      "cards": 42
+    },
+    {
+      "name": "NLM::P2P_ment_pro_05: Forjando Dashboards Interativos com Streaml",
+      "cards": 50
+    },
+    {
+      "name": "NLM::[Dados] Terminologia e Medidas em Epidemiologia: Padronizaçã",
+      "cards": 50
+    },
+    {
+      "name": "NLM::CS50x 2024 - Lecture 8 - HTML, CSS, JavaScript _ Estrutura, ",
+      "cards": 70
+    },
+    {
+      "name": "NLM::CS50x 2024 - Lecture 7 - SQL Fundamentos SQL: Consultas, Jun",
+      "cards": 66
+    },
+    {
+      "name": "NLM::MBE_10: estatística na prática médica",
+      "cards": 61
+    },
+    {
+      "name": "NLM::MBE_12: A análise bayesiana dos estudos científicos",
+      "cards": 40
+    },
+    {
+      "name": "NLM::[akita] Arquitetura, Concorrência e Os Fatores do Software M",
+      "cards": 101
+    },
+    {
+      "name": "NLM::P2P_ment_expl_09: Dashboards e Princípios de Visualização no",
+      "cards": 48
+    },
+    {
+      "name": "NLM::[EM] [cardio] [ECG] ECG José Alencar",
+      "cards": 103
+    },
+    {
+      "name": "NLM::[TI] [CLI] Manipulação Correta de Nomes de Arquivos no Shell",
+      "cards": 45
+    },
+    {
+      "name": "NLM::[ASIMOV] [Python] Análise de Dados com Python e Google Colab",
+      "cards": 75
+    },
+    {
+      "name": "NLM::[ASIMOV] Git e Branches: Árvore do Projeto",
+      "cards": 53
+    },
+    {
+      "name": "NLM::[ASIMOV] [Python] Fundamentos de Arquivos e Dados em Python",
+      "cards": 57
+    },
+    {
+      "name": "NLM::P2P_ment_pro_9: Estatística Inferencial: Amostragem, Viés e ",
+      "cards": 40
+    },
+    {
+      "name": "NLM::P2P_ment_pro_7: SQL Avançado: Joins, Agregação e Subqueries",
+      "cards": 39
+    },
+    {
+      "name": "NLM::P2P_ment_pro_13: Regressão Linear e Inferência Causal na Saú",
+      "cards": 44
+    },
+    {
+      "name": "NLM::P2P_ment_pro_4: Análise e Visualização de Dados de Solicitaç",
+      "cards": 50
+    },
+    {
+      "name": "NLM::[EM] [cardio] Diretriz Brasileira de Dor Torácica",
+      "cards": 64
+    },
+    {
+      "name": "NLM::[TI] Missing Semester 10 Automação de Tarefas com Cron e Ana",
+      "cards": 36
+    },
+    {
+      "name": "NLM::P2P_ment_expl_13:Narrativas de Dados: Da Exploração à Decisã",
+      "cards": 50
+    },
+    {
+      "name": "NLM::Ciência de Dados: O Poder da Linha de Comando",
+      "cards": 69
+    },
+    {
+      "name": "NLM::Python: Automatizando Tarefas Tediosas",
+      "cards": 86
+    },
+    {
+      "name": "NLM::[ASIMOV] Desafios e Soluções em SQL",
+      "cards": 60
+    },
+    {
+      "name": "NLM::[REF] Dominando Symlinks para Obsidian",
+      "cards": 33
+    },
+    {
+      "name": "NLM::Cuidados Paliativos em Emergência",
+      "cards": 113
+    },
+    {
+      "name": "NLM::[EM] [cardio] Diretrizes de Manejo para Síndromes Coronárias",
+      "cards": 87
+    },
+    {
+      "name": "NLM::[REF] Zotero: Organizando Pesquisas e Referências",
+      "cards": 79
+    }
+  ]
+}

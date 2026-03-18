@@ -12,3 +12,4 @@ notas_data_profile.json
 __pycache__/
 *.pyc
 .venv/
+dados/nlm_batch/
