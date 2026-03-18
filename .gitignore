@@ -1,0 +1,14 @@
+# Backups do Anki (dados pessoais, não versionar)
+backups/
+*.anki2
+
+# Dados exportados brutos
+notas_data_profile.json
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/

@@ -1,0 +1,7 @@
+#separator:Tab
+#html:true
+#notetype:Basic
+#deck:Exemplos::Git Comandos
+#tags:git comandos
+Como criar um repositório Git?	<code>git init</code><br><br>Cria a pasta <code>.git/</code> no diretório atual. A partir daí, o Git rastreia mudanças nessa pasta.
+Como verificar o status dos arquivos?	<code>git status</code><br><br>Mostra:<br>• Arquivos modificados (vermelho)<br>• Arquivos no staging (verde)<br>• Branch atual

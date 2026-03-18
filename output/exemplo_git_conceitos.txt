@@ -1,0 +1,10 @@
+#separator:Tab
+#html:true
+#notetype:Basic
+#deck:Exemplos::Git Conceitos
+#tags:git conceitos
+O que é Git?	Sistema de controle de versão distribuído que rastreia mudanças em arquivos
+O que é um commit?	Snapshot (foto) do estado dos arquivos em um momento específico
+O que é uma branch?	Linha independente de desenvolvimento — permite trabalhar sem afetar a principal
+O que é um merge?	Operação que une as mudanças de uma branch em outra
+O que é um remote?	Cópia do repositório em outro lugar (ex: GitHub). 'origin' é o remote padrão

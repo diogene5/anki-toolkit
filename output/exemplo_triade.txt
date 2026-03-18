@@ -1,0 +1,7 @@
+#separator:Tab
+#html:true
+#notetype:Programação - Tríade (Planilha↔Python↔SQL)
+#deck:Exemplos::Tríade
+#tags:data triade
+Filtrar linhas por condição	Dados > Filtro > selecionar valores	<code>df[df['idade'] > 18]</code>	<code>SELECT * FROM t WHERE idade > 18</code>
+Ordenar dados	Dados > Classificar	<code>df.sort_values('col', ascending=False)</code>	<code>SELECT * FROM t ORDER BY col DESC</code>
