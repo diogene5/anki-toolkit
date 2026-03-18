@@ -51,7 +51,7 @@ random.seed(88)  # Seed única para quizzes (diferente de flashcards: 77-79)
 # Importar módulo compartilhado
 import sys
 sys.path.insert(0, str(Path(__file__).parent))
-from shared import CARD_CSS, enriquecer_html, safe_name, limpar_titulo
+from shared import CARD_CSS, enriquecer_html, safe_name, limpar_titulo, categorizar
 
 # ─── CSS estendido para quizzes ───────────────────────────────
 # Herda o CARD_CSS base e adiciona estilos para opções de múltipla escolha
@@ -114,53 +114,7 @@ QUIZ_MODEL = genanki.Model(
 )
 
 
-# ─── Categorização (mesmas regras de batch_por_categoria.py) ──
-CATEGORIAS = [
-    (["CS50", "ASIMOV", "Python", "Git", "SQL", "DS-CLI", "DS_CLI",
-      "CLI", "Shell", "Bash", "Script", "Missing Semester",
-      "Vim", "IDE", "Ambiente de Desenvolvimento", "Doc-as-code",
-      "Ciência de Dados", "Linha de Comando", "Lógica de Programação",
-      "Fundamentos do Desenvolvimento", "Ferramenta", "MCP", "Agno",
-      "LangChain", "Streamlit", "Machine Learning",
-      "Manipulação Correta de Nomes", "Automação de Tarefas com Cron",
-      "Symlinks", "Matplotlib", "Plotly", "Seaborn", "OpenPyEx",
-      "LM Studio", "API"], "Programação"),
-    (["EM", "Pediatr", "Via Aérea", "Intub", "ACLS", "PALS",
-      "Ressuscit", "Trauma", "ECG", "cardio", "Dispneia",
-      "Emergênci", "Cetoacidose", "Sepse", "BVM", "Ventil",
-      "Bolsa-Válvula", "Manejo", "MBE", "Cuidados Paliativos",
-      "Lesão Renal", "Hipertensão", "Coronária", "Dor Torácica",
-      "Probabilidade Pré-Teste", "Epidemiologia",
-      "Emergência Pediátrica", "PEM", "Abordagem Prática",
-      "Malpractice", "Suporte Básico", "Suporte Avançado",
-      "Gemini TextBlaze", "estatística na prática médica",
-      "análise bayesiana"], "Medicina"),
-    (["P2P", "Dados", "Data", "Modelagem", "DAX", "Power",
-      "Planilha", "Dashboard", "Indicadores", "KNIME",
-      "Warehouse", "Estatística", "Regressão", "Amostragem",
-      "Hipótese", "Inferência", "EDA", "Visualização",
-      "Narrativas de Dados", "Pareto", "Governança"], "Data"),
-    (["Obsidian", "Zotero", "Hazel", "Keyboard Maestro",
-      "SiteSucker", "Downie", "Text Blaze", "NotebookLM",
-      "Dotfiles", "Backup", "SSH", "Navegador", "iPhone",
-      "Máquinas Virtuais", "Contêiner"], "Ferramentas"),
-    (["Lean", "Gestão", "UPA", "Jornada do Paciente",
-      "SBIS", "Prontuário", "FRAM", "Regulação",
-      "Superlotação", "Protocolo de Londres", "Workshop",
-      "Operações", "Liderança", "Qualidade", "Serviço",
-      "SAMU", "Excelência", "Certificação", "Rede Atenção",
-      "GRADE"], "Gestão"),
-    (["Investimento", "Renda Fixa", "Tesouro", "Dólar",
-      "Finanças", "FIN"], "Finanças"),
-]
-
-
-def categorizar(titulo: str) -> str:
-    for patterns, cat in CATEGORIAS:
-        for p in patterns:
-            if p.lower() in titulo.lower():
-                return cat
-    return "Outros"
+# Categorização importada de shared.py (CATEGORIAS + categorizar)
 
 
 def formatar_questao_frente(q: dict) -> str:
@@ -371,7 +325,7 @@ def categorizar_quizzes():
             continue
 
         title = data.get('title', jp.stem)
-        cat = categorizar(title)
+        cat = categorizar(title, jp.name)
         notas, _ = converter_quiz_json(str(jp))
         if notas:
             por_cat[cat].append((title, notas))

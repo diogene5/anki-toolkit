@@ -258,3 +258,92 @@ def limpar_titulo(titulo: str) -> str:
     # Remove MBE_NN: (mantem "MBE: " como contexto)
     titulo = re.sub(r'MBE_\d+:\s*', 'MBE: ', titulo)
     return titulo.strip()
+
+
+# ─── Categorização de notebooks ───────────────────────────────
+#
+# Regras para classificar notebooks do NotebookLM em categorias
+# temáticas. A ordem importa: a primeira match vence.
+# Os padrões são case-insensitive e buscam substring no título.
+#
+# Para quizzes, o NotebookLM gera títulos genéricos ("Análise Quiz"),
+# então os padrões também buscam no nome do ARQUIVO (que contém
+# o título original do notebook).
+
+CATEGORIAS = [
+    # Programação / CS / CLI / DevOps
+    (["CS50", "ASIMOV", "Python", "Git", "SQL", "DS-CLI", "DS_CLI",
+      "CLI", "Shell", "Bash", "Script", "Missing Semester",
+      "Vim", "IDE", "Ambiente de Desenvolvimento", "Doc-as-code",
+      "Ciência de Dados", "Linha de Comando", "Lógica de Programação",
+      "Fundamentos do Desenvolvimento", "Ferramenta", "MCP", "Agno",
+      "LangChain", "Streamlit", "Machine Learning",
+      "Manipulação Correta de Nomes", "Automação de Tarefas com Cron",
+      "Symlinks", "Matplotlib", "Plotly", "Seaborn", "OpenPyEx",
+      "LM Studio", "API", "Crontab", "Engenharia",
+      "Arquitetura", "Concorrência", "12 Fatores", "akita",
+      "Computação", "Algoritmo", "Arrays", "Scratch",
+      "Automatizando Tarefas"], "Programação"),
+
+    # Medicina / Emergência / Saúde clínica
+    (["EM", "Pediatr", "Via Aérea", "Intub", "ACLS", "PALS",
+      "Ressuscit", "Trauma", "ECG", "cardio", "Dispneia",
+      "Emergênci", "Cetoacidose", "Sepse", "BVM", "Ventil",
+      "Bolsa-Válvula", "Manejo", "MBE", "Cuidados Paliativos",
+      "Lesão Renal", "Hipertensão", "Coronária", "Dor Torácica",
+      "Probabilidade Pré-Teste", "Epidemiologia",
+      "Emergência Pediátrica", "PEM", "Abordagem Prática",
+      "Malpractice", "Suporte Básico", "Suporte Avançado",
+      "Gemini TextBlaze", "estatística na prática médica",
+      "análise bayesiana", "Laringoscopia", "Farmacologia",
+      "Pneumologia", "Obesidade", "Diagnóstico",
+      "Sequencia rápida", "Extraglótico", "Eletrocardiograma",
+      "Evidências", "Saúde"], "Medicina"),
+
+    # Data / P2P / Análise / BI
+    (["P2P", "Dados", "Data", "Modelagem", "DAX", "Power",
+      "Planilha", "Dashboard", "Indicadores", "KNIME",
+      "Warehouse", "Estatística", "Regressão", "Amostragem",
+      "Hipótese", "Inferência", "EDA", "Visualização",
+      "Narrativas de Dados", "Pareto", "Governança",
+      "Data Science", "ANÁLISE", "Análise de Dados"], "Data"),
+
+    # Obsidian / Ferramentas de produtividade
+    (["Obsidian", "Zotero", "Hazel", "Keyboard Maestro",
+      "SiteSucker", "Downie", "Text Blaze", "NotebookLM",
+      "Dotfiles", "Backup", "SSH", "Navegador", "iPhone",
+      "Máquinas Virtuais", "Contêiner", "Johnny Decimal",
+      "QuickAdd", "Documentação"], "Ferramentas"),
+
+    # Lean / Gestão / Saúde pública
+    (["Lean", "Gestão", "UPA", "Jornada do Paciente",
+      "SBIS", "Prontuário", "FRAM", "Regulação",
+      "Superlotação", "Protocolo de Londres", "Workshop",
+      "Operações", "Liderança", "Qualidade", "Serviço",
+      "SAMU", "Excelência", "Certificação", "Rede Atenção",
+      "GRADE", "Quality"], "Gestão"),
+
+    # Finanças
+    (["Investimento", "Renda Fixa", "Tesouro", "Dólar",
+      "Finanças", "FIN"], "Finanças"),
+]
+
+
+def categorizar(titulo: str, filename: str = "") -> str:
+    """
+    Determina a categoria de um notebook pelo título.
+
+    Para quizzes do NotebookLM (que têm títulos genéricos como "Análise Quiz"),
+    também verifica o nome do arquivo (que contém o título original do notebook).
+
+    Args:
+        titulo: título do notebook ou do quiz
+        filename: nome do arquivo (opcional, para fallback)
+    """
+    # Combinar título + filename para busca mais ampla
+    search_text = f"{titulo} {filename}".lower()
+    for patterns, cat in CATEGORIAS:
+        for p in patterns:
+            if p.lower() in search_text:
+                return cat
+    return "Outros"

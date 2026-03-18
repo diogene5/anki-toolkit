@@ -32,72 +32,12 @@ import random
 random.seed(79)
 
 # CSS, modelo e funções de texto centralizados em shared.py
-from shared import CARD_CSS, create_model, enriquecer_html, safe_name, limpar_titulo
+from shared import CARD_CSS, create_model, enriquecer_html, safe_name, limpar_titulo, categorizar
 
 MODEL = create_model()
 
 
-# ─── Regras de categorização ─────────────────────────────────
-# Cada regra: (padrões no título, categoria)
-
-CATEGORIAS = [
-    # Programação / CS / CLI
-    (["CS50", "ASIMOV", "Python", "Git", "SQL", "DS-CLI", "DS_CLI",
-      "CLI", "Shell", "Bash", "Script", "Missing Semester",
-      "Vim", "IDE", "Ambiente de Desenvolvimento", "Doc-as-code",
-      "Ciência de Dados", "Linha de Comando", "Lógica de Programação",
-      "Fundamentos do Desenvolvimento", "Ferramenta", "MCP", "Agno",
-      "LangChain", "Streamlit", "Machine Learning",
-      "Manipulação Correta de Nomes", "Automação de Tarefas com Cron",
-      "Symlinks", "Matplotlib", "Plotly", "Seaborn", "OpenPyEx",
-      "LM Studio", "API"], "Programação"),
-
-    # Medicina / Emergência
-    (["EM", "Pediatr", "Via Aérea", "Intub", "ACLS", "PALS",
-      "Ressuscit", "Trauma", "ECG", "cardio", "Dispneia",
-      "Emergênci", "Cetoacidose", "Sepse", "BVM", "Ventil",
-      "Bolsa-Válvula", "Manejo", "MBE", "Cuidados Paliativos",
-      "Lesão Renal", "Hipertensão", "Coronária", "Dor Torácica",
-      "Probabilidade Pré-Teste", "Epidemiologia",
-      "Emergência Pediátrica", "PEM", "Abordagem Prática",
-      "Malpractice", "Suporte Básico", "Suporte Avançado",
-      "Gemini TextBlaze", "estatística na prática médica",
-      "análise bayesiana"], "Medicina"),
-
-    # Data / P2P / Análise
-    (["P2P", "Dados", "Data", "Modelagem", "DAX", "Power",
-      "Planilha", "Dashboard", "Indicadores", "KNIME",
-      "Warehouse", "Estatística", "Regressão", "Amostragem",
-      "Hipótese", "Inferência", "EDA", "Visualização",
-      "Narrativas de Dados", "Pareto", "Governança"], "Data"),
-
-    # Obsidian / Ferramentas de produtividade
-    (["Obsidian", "Zotero", "Hazel", "Keyboard Maestro",
-      "SiteSucker", "Downie", "Text Blaze", "NotebookLM",
-      "Dotfiles", "Backup", "SSH", "Navegador", "iPhone",
-      "Máquinas Virtuais", "Contêiner"], "Ferramentas"),
-
-    # Lean / Gestão / Saúde pública
-    (["Lean", "Gestão", "UPA", "Jornada do Paciente",
-      "SBIS", "Prontuário", "FRAM", "Regulação",
-      "Superlotação", "Protocolo de Londres", "Workshop",
-      "Operações", "Liderança", "Qualidade", "Serviço",
-      "SAMU", "Excelência", "Certificação", "Rede Atenção",
-      "GRADE"], "Gestão"),
-
-    # Finanças
-    (["Investimento", "Renda Fixa", "Tesouro", "Dólar",
-      "Finanças", "FIN"], "Finanças"),
-]
-
-
-def categorizar(titulo: str) -> str:
-    """Determina a categoria de um notebook pelo título."""
-    for patterns, cat in CATEGORIAS:
-        for p in patterns:
-            if p.lower() in titulo.lower():
-                return cat
-    return "Outros"
+# Categorização agora vem de shared.py (CATEGORIAS + categorizar)
 
 
 def main():
@@ -149,7 +89,7 @@ def main():
                 title = orig_title
                 break
 
-        cat = categorizar(title)
+        cat = categorizar(title, json_path.name)
         cards = data.get('cards', [])
         if cards:
             por_categoria[cat].append((title, cards))
