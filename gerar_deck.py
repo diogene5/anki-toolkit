@@ -1,17 +1,63 @@
 #!/usr/bin/env python3
 """
-Gera deck Anki consolidado de Programação.
-Estrutura: hierarquia limpa, tags consistentes, padrão tríade onde aplicável.
+🎴 gerar_deck.py — Gerador de deck Anki (.apkg) de Programação
+
+O QUE ESTE SCRIPT FAZ:
+─────────────────────────
+Cria um arquivo .apkg (deck empacotado) com 142+ cards organizados em
+hierarquia de sub-decks, dois note types customizados com CSS dark mode,
+e tags consistentes.
+
+COMO O GENANKI FUNCIONA:
+─────────────────────────
+genanki é uma biblioteca Python para criar arquivos .apkg sem precisar
+do Anki instalado. Ela monta a estrutura SQLite que o Anki espera:
+
+  Model (note type)  →  define campos e templates HTML
+  Deck               →  baralho onde as notas vivem
+  Note               →  conteúdo (campos preenchidos)
+  Package            →  empacota tudo em .apkg (ZIP com SQLite + mídia)
+
+IDs NUMÉRICOS:
+Todo Model e Deck precisa de um ID numérico ÚNICO e ESTÁVEL.
+Se mudar o ID entre execuções, o Anki trata como objeto novo
+(duplica em vez de atualizar). Use números fixos, não random().
+
+HIERARQUIA DE DECKS:
+O Anki usa "::" como separador de hierarquia.
+  "Dev::Git & GitHub::Fundamentos"
+  └── cria: Dev > Git & GitHub > Fundamentos (3 níveis)
+
+USO:
+  python3 gerar_deck.py
+  # Resultado: Dev_Programacao.apkg (importar via File > Import no Anki)
+
+DEPENDÊNCIAS:
+  pip install genanki
 """
 import genanki
 import random
 
+# Seed fixa garante que genanki gere os mesmos GUIDs para as notas
+# entre execuções. Sem isso, re-importar criaria duplicatas.
 random.seed(42)
 
-# ─── Note Types ────────────────────────────────────────────────
+# ─── Note Types (Modelos de Nota) ─────────────────────────────
+#
+# Um "note type" (modelo) define:
+#   1. CAMPOS (fields): os dados que você preenche (Frente, Verso, etc.)
+#   2. TEMPLATES: o HTML que gera cada card a partir dos campos
+#   3. CSS: estilo visual dos cards
+#
+# Uma nota com 4 campos pode gerar múltiplos cards se tiver
+# múltiplos templates. Ex: o modelo Tríade abaixo gera 2 cards
+# por nota (um pergunta Python, outro pergunta SQL).
+#
+# {{Campo}} no template é substituído pelo conteúdo do campo.
+# {{FrontSide}} no template do verso inclui o HTML da frente.
 
 BASIC_MODEL = genanki.Model(
-    1607392001,
+    1607392001,  # ID fixo — NUNCA mude isso depois de importar
     'Programação - Basic',
     fields=[
         {'name': 'Frente'},
